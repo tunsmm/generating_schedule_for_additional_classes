@@ -43,5 +43,6 @@ To download a file, use the `/downloadfile/{filename}` endpoint. Replace `filena
 ## Important Notes
 
 - Uploaded files are stored in the `uploads` directory.
-- Ensure the directory exists or create it manually.
+- Generated schedule  files are stored in the `generated_schedule` directory.
+- Ensure the directory exists or the program will create it automatically.
 - Customize the application based on your specific requirements.
