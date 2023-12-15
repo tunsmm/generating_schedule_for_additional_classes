@@ -1,0 +1,1 @@
+This is the stub file that we just want to show like a result of generating schedule.
