@@ -1,13 +1,12 @@
+import shutil
+
+from config import GENERATED_SCHEDULE_DIR, UPLOAD_DIR
+
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.responses import StreamingResponse
-import shutil
-from pathlib import Path
 
 app = FastAPI()
 
-# Directory to store uploaded files
-UPLOAD_DIR = Path("uploads")
-UPLOAD_DIR.mkdir(exist_ok=True)
 
 @app.post("/uploadfile/")
 async def create_upload_file(file: UploadFile = File(...)):
@@ -18,9 +17,10 @@ async def create_upload_file(file: UploadFile = File(...)):
 
     return {"filename": file.filename}
 
-@app.get("/downloadfile/{filename}")
-async def download_file(filename: str):
-    file_path = UPLOAD_DIR / filename
+@app.get("/generate_schedule/")
+async def generate_schedule():
+    filename = 'stub_file.txt'
+    file_path = GENERATED_SCHEDULE_DIR / filename
 
     if not file_path.exists():
         raise HTTPException(status_code=404, detail="File not found")
