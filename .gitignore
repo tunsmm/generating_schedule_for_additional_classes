@@ -1,3 +1,6 @@
+# Directory for storing files
+/back/app/uploads
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
