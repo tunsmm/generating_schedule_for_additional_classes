@@ -1,5 +1,8 @@
-# Directory for storing files
+# Directory for storing uploaded files
 /back/app/uploads
+
+# Directory for storing generated schedule files
+/back/app/generated_schedule
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
