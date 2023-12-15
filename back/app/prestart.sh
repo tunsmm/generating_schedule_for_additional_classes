@@ -1,0 +1,1 @@
+pip install --root-user-action=ignore --no-cache-dir -r /app/requirements.txt

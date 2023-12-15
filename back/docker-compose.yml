@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  fastapi-app:
+    image: tiangolo/uvicorn-gunicorn-fastapi:python3.11
+    container_name: fastapi-app
+    volumes:
+      - ./app:/app
+    ports:
+      - "8000:80"
+    environment:
+      - MODULE_NAME=main
+      - VARIABLE_NAME=app
+      - UVICORN_CMD="uvicorn main:app --host 0.0.0.0 --port 80 --reload"
+    # command: /bin/sh -c "pip install --root-user-action=ignore --no-cache-dir -r /app/requirements.txt && exec $UVICORN_CMD"
