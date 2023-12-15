@@ -4,6 +4,8 @@ This is a basic FastAPI application that allows you to upload files and download
 
 ## Setup
 
+### manual setup
+
 1. Install the required dependencies using the following command:
 
 ```bash
@@ -16,8 +18,15 @@ pip install -r requirements.txt
 uvicorn main:app --reload
 ```
 
-This will start the server at http://127.0.0.1:8000.
+### via Docker
 
+1. From this directory run the following command:
+
+```bash
+docker-compose up -d 
+```
+
+This will start the server at http://127.0.0.1:8000.
 
 ## Usage
 
