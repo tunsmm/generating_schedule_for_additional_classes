@@ -26,13 +26,15 @@ uvicorn main:app --reload
 docker-compose up -d 
 ```
 
-This will start the server at http://127.0.0.1:8000.
+In both cases this will start the server at http://127.0.0.1:8000.
 
 ## Usage
 
 **Upload File**
 
 To upload a file, use the `/uploadfile/` endpoint. Refer to the Swagger documentation at http://127.0.0.1:8000/docs and make a `POST` request to `/uploadfile/`.
+
+It will create `uploads` directory in your system and will store all files there.
 
 **Download File**
 To download a file, use the `/downloadfile/{filename}` endpoint. Replace `filename` with the actual filename you want to download. Access the Swagger documentation or http://127.0.0.1:8000/redoc for details.
