@@ -107,7 +107,7 @@ export class FileLoadingComponent {
     try {
       await fetch('http://localhost:8000/generate_schedule/', {method: 'GET'})
         .then(data => data.blob())
-        .then((data) => this.download(data, 'file.xlsx'));
+        .then((data) => this.download(data, 'result_schedule.xlsx'));
     } catch (err) {
       console.log(err)
     }
