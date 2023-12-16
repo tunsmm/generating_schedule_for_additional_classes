@@ -10,7 +10,9 @@ app = FastAPI()
 
 origins = [
     "http://localhost",
+    "http://localhost:4200",
     "http://localhost:8080",
+    "http://localhost:80",
 ]
 
 app.add_middleware(
@@ -22,10 +24,20 @@ app.add_middleware(
 )
 
 
-@app.post("/uploadfile/")
+@app.post("/uploadfile/schedules")
 async def create_upload_file(file: UploadFile = File(...)):
     # Save the uploaded file
-    file_path = UPLOAD_DIR / file.filename
+    file_path = UPLOAD_DIR / "schedules" / file.filename
+    print(file_path)
+    with file_path.open("wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+
+    return {"filename": file.filename}
+
+@app.post("/uploadfile/studentsGroups")
+async def create_upload_file(file: UploadFile = File(...)):
+    # Save the uploaded file
+    file_path = UPLOAD_DIR / "studentsGroups" / file.filename
     with file_path.open("wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
 
@@ -33,7 +45,7 @@ async def create_upload_file(file: UploadFile = File(...)):
 
 @app.get("/generate_schedule/")
 async def generate_schedule():
-    filename = 'stub_file.txt'
+    filename = 'result_schedule.xlsx'
     file_path = GENERATED_SCHEDULE_DIR / filename
 
     if not file_path.exists():
