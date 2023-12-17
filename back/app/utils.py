@@ -1,3 +1,6 @@
+from openpyxl import Workbook
+
+
 def generate_excel(extra_classes: list, extra_groups: list, file_path: str):
     """
     Generate excel based on data like that 
@@ -16,4 +19,15 @@ def generate_excel(extra_classes: list, extra_groups: list, file_path: str):
         }
     ]
     """
-    pass
+    workbook = Workbook()
+
+    sheet = workbook.active
+    sheet.title = "extra_groups"
+
+    sheet2 = workbook.create_sheet(title="extra_classes")
+
+    # TODO: Add implementation of inserting values
+
+    # sheet["A4"] = "row 4"
+
+    workbook.save(file_path)
