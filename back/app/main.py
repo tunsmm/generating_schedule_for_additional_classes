@@ -1,10 +1,12 @@
 import shutil
 
-from config import GENERATED_SCHEDULE_DIR, UPLOAD_DIR
+from config import UPLOAD_DIR
 
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.responses import StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
+
+from schedule import get_generated_schedule_name
 
 app = FastAPI()
 
@@ -20,7 +22,7 @@ app.add_middleware(
 
 
 @app.post("/uploadfile/schedules")
-async def create_upload_file(file: UploadFile = File(...)):
+async def create_upload_schedule_file(file: UploadFile = File(...)):
     # Save the uploaded file
     file_path = UPLOAD_DIR / "schedules" / file.filename
     print(file_path)
@@ -29,8 +31,9 @@ async def create_upload_file(file: UploadFile = File(...)):
 
     return {"filename": file.filename}
 
+
 @app.post("/uploadfile/studentsGroups")
-async def create_upload_file(file: UploadFile = File(...)):
+async def create_upload_student_file(file: UploadFile = File(...)):
     # Save the uploaded file
     file_path = UPLOAD_DIR / "studentsGroups" / file.filename
     with file_path.open("wb") as buffer:
@@ -38,12 +41,15 @@ async def create_upload_file(file: UploadFile = File(...)):
 
     return {"filename": file.filename}
 
+
 @app.get("/generate_schedule/")
-async def generate_schedule():
-    filename = 'result_schedule.xlsx'
-    file_path = GENERATED_SCHEDULE_DIR / filename
+async def get_generated_schedule():
+    file_path = get_generated_schedule_name()
 
     if not file_path.exists():
-        raise HTTPException(status_code=404, detail="File not found")
+        raise HTTPException(
+            status_code=404, 
+            detail=f"File with name {file_path.split('/')[-1]} is not found",
+        )
 
     return StreamingResponse(open(file_path, "rb"), media_type="application/octet-stream", headers={"Content-Disposition": f"attachment; filename={filename}"})
