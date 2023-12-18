@@ -65,7 +65,7 @@ def generate_excel(extra_classes: list, extra_groups: list, file_path: str):
     sheet2["D1"] = "Четверг"
     sheet2["E1"] = "Пятница"
     sheet2["F1"] = "Суббота"
-    sheet2["G1"] = "Воскреесенье"
+    sheet2["G1"] = "Воскресенье"
 
     for class_ in extra_classes:
         weekday = class_.get("weekday")
