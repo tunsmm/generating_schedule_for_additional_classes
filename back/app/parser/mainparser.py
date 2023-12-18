@@ -1,6 +1,7 @@
-from parsers.extraclassesparser import ExtraClassesParser
-from parsers.groupsclassesparser import GroupsClassesParser
-from parsers.groupsstudentsparser import GroupsStudentsParser
+# Я хз, уже поздно, в моем случае при запуске относительный импорт не работает. Захардкодил абсолютный
+from parser.parsers.extraclassesparser import ExtraClassesParser
+from parser.parsers.groupsclassesparser import GroupsClassesParser
+from parser.parsers.groupsstudentsparser import GroupsStudentsParser
 
 
 class MainParser:

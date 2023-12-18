@@ -1,12 +1,15 @@
-from config import GENERATED_SCHEDULE_DIR, UPLOAD_DIR
+from config import GENERATED_SCHEDULE_DIR, UPLOAD_DIR, WEEKDAYS_COUNT, CLASSES_COUNT, MAX_GROUP_CAPACITY
 
 from parser.mainparser import MainParser
 from utils import generate_excel
+
+time_table_alg = create_timetable_alg(MAX_GROUP_CAPACITY, WEEKDAYS_COUNT, CLASSES_COUNT)
 
 
 def get_generated_schedule_name():
     filename = __generate_schedule()
     return filename
+
 
 def __generate_schedule() -> str:
     main_parser = MainParser()
@@ -18,8 +21,13 @@ def __generate_schedule() -> str:
     file_dir = UPLOAD_DIR / "schedules"
     parsed_groups_classes_data = main_parser.getGroupsClassesJson(file_dir)
 
-    # TODO: Add algorithm working
-    extra_classes, extra_groups = None, None  # Here is your algorithm result
+    data_to_alg = {
+        "classes": parsed_groups_classes_data,
+        "main_groups": parsed_groups_classes_data,
+        "extra_classes": parsed_extra_classes_data
+    }
+
+    extra_groups, extra_classes = time_table_alg.process(data_to_alg)  # Here is your algorithm result
 
     filename = 'result_schedule.xlsx'
     file_path = GENERATED_SCHEDULE_DIR / filename
