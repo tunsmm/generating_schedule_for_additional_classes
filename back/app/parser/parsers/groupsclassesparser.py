@@ -8,6 +8,13 @@ class GroupsClassesParser:
         self.schedules = []
     
     def _findStart(self, dataframe):
+        """
+        Данный метод отсекает шапку расписания, которая не несёт для нас ни какой информации.
+        Дополнитеьлно обрабатывает разные версии файла (День недели может быть указан как
+        слева от месяцев, так и справа).
+        :param dataframe: таблица в формате Daraframe, прочитанная из таблицы формата xlsx без обработки.
+        :return: обработанная таблица без шапки и месяцев.
+        """
         bool_rename = False
         idx = 0
         new_df = pd.DataFrame()
@@ -29,6 +36,14 @@ class GroupsClassesParser:
         return new_df
     
     def _modifyXSLX(self, name):
+        """
+        Метод занимается чтением и предобработкой таблицы. Здесь происходит удаление шапки, столбцов
+        с месяцами, всех ненужных данных из таблицы. Далее пары помечаются found и таблица уменьшается.
+        В изначальной таблице на каждую пару выделяется 3 строки и 4 столбца.
+        :param name: название файла с таблицей.
+        :return: result - список dataframe с расписанием; groups - список названий групп для каждого
+        dataframe
+        """
         df2 = pd.read_excel(name, header=None, keep_default_na=False)
         df2 = self._findStart(df2)
         df2 = df2[:-2]
