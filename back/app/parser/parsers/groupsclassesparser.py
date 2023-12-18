@@ -161,7 +161,7 @@ class GroupsClassesParser:
         schedules_list = []
         rez = os.listdir(path)
         for n, item in enumerate(rez):
-            filename = path + item
+            filename = path / item
             schedules_list.append(filename)
         
         self.schedules = schedules_list
