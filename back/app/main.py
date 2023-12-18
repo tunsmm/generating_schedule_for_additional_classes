@@ -52,4 +52,8 @@ async def get_generated_schedule():
             detail=f"File with name {file_path.split('/')[-1]} is not found",
         )
 
-    return StreamingResponse(open(file_path, "rb"), media_type="application/octet-stream", headers={"Content-Disposition": f"attachment; filename={filename}"})
+    return StreamingResponse(
+        open(file_path, "rb"), 
+        media_type="application/octet-stream", 
+        headers={"Content-Disposition": f"attachment; filename={file_path}"}
+    )
