@@ -3,3 +3,4 @@ uvicorn==0.15.0
 openpyxl
 pandas
 python-multipart
+xlrd
