@@ -5,13 +5,21 @@ from alg.preprocessstage import PreprocessStage
 
 class PreprocessStageImpl1(PreprocessStage):
     def __init__(self, weekdays=6, classes_count=6):
+        # self._classes_variant = {
+        #     "1-2": 0,
+        #     "3-4": 1,
+        #     "5-6": 2,
+        #     "7-8": 3,
+        #     "9-10": 4,
+        #     "11-12": 5,
+        # }
         self._classes_variant = {
-            "1-2": 0,
-            "3-4": 1,
-            "5-6": 2,
-            "7-8": 3,
-            "9-10": 4,
-            "11-12": 5,
+            "1": 0,
+            "2": 1,
+            "3": 2,
+            "4": 3,
+            "5": 4,
+            "6": 5,
         }
 
         self._weekdays_variants = {
@@ -68,7 +76,7 @@ class PreprocessStageImpl1(PreprocessStage):
         result = []
 
         weekdays_variants = self._weekdays_variants
-        classes_variant = self._classes_variant
+        classes_variants = self._classes_variant
 
         middle_dict = {}
         for group in data:
@@ -83,7 +91,7 @@ class PreprocessStageImpl1(PreprocessStage):
                 class_name = class_name.replace(" ", "").lower()
 
                 weekday = weekdays_variants[weekday_name]
-                class_num = classes_variant[class_name]
+                class_num = classes_variants[class_name]
 
                 class_key = (class_num, weekday)
 
