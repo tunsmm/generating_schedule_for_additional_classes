@@ -28,6 +28,18 @@ docker-compose up -d
 
 In both cases this will start the server at http://127.0.0.1:8000.
 
+
+## Configuration
+
+You can configurate different variables in `back/app/config.py`
+- UPLOAD_DIR - all uploaded files is placed here
+- GENERATED_SCHEDULE_DIR - - all generated schedule files
+- WEEKDAYS_COUNT - how many week days in your week
+- CLASSES_COUNT - how many classes or pairs for each day
+- MAX_GROUP_CAPACITY - how many people per additional group
+- GENERATED_FILE_NAME - name of file with generated schedule
+
+
 ## Usage
 
 **Upload File**
