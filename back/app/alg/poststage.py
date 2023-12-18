@@ -1,9 +1,22 @@
 class PostProcessData:
-    def __init__(self, main_groups):
-        self._main_groups = main_groups
+    def __init__(self, main_groups_json):
+        self.set_main_groups(main_groups_json)
 
     def extra_groups_process(self, groups):
         pass
+
+    def set_main_groups(self, groups_json):
+        self._main_groups = {}
+        for group in groups_json:
+            group_data = group["group"]
+            group_name = group_data["name"]
+            for stud in group_data["students"]:
+                self._main_groups[stud] = group_name
+    def get_group_by_student(self, student):
+        result = ""
+        if student in self._main_groups:
+            result = self._main_groups[student]
+        return result
 
     def get_group_name(self, group_prefix, group_num):
         return group_prefix + "--" + str(group_num)
@@ -31,8 +44,9 @@ class PostProcessData:
                             students = group["students"]
                             students_data = []
                             for student in students:
+                                group_name = self.get_group_by_student(student)
                                 students_data.append({
-                                    "group": "",
+                                    "group": group_name,
                                     "name": student
                                 })
                             data_to_add = students_data
